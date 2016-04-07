@@ -160,20 +160,20 @@
 
 								</tbody>
 
-								<script type="text/html" data-id="template">
+								<script id="row-temlate" type="text/html" data-id="template">
 									<tr>
 										<td class="td0">
-											<div class="icon" ><div class="fa fa-phone"  data-id="icon"></div></div>
+											<div class="icon" ><div class="<%=icon%>"  data-id="icon"></div></div>
 										</td>
 										<td class="td1">
-											<span data-id="name"> I</span>
+											<span data-id="name"><%=name%></span>
 										</td>
 										<td  class="td2">
-											<span data-id="time,time_color" class="time">00:02:01</span>
+											<span data-id="time,time_color" class="<%=time_color%>"><%=time%></span>
 										</td>
 										<td class="td3">
 											<div class="animation">
-												<div data-id="aux,aux_color" ></div>
+												<div data-id="aux,aux_color" ><%=aux%></div>
 											</div>
 
 										</td>
@@ -184,16 +184,19 @@
 							</table>
 						</div>
 					</div>
-					<script  src="com/ItemValue.js"></script>
+					<!--<script  src="com/ItemValue.js"></script>
 					<script  src="com/TableRow.js"></script>
 					<script  src="apps/Formatter.js"></script>
 					<script  src="com/TableStatic.js"></script>
-					<script  src="com/TableInfin.js"></script>
+					<script  src="com/TableInfin.js"></script>-->'
+					<script  src="libs/backbone-min.js"></script>
+					<script  src="apps/BackboneTable.js"></script>
 
-							<script>
+						<script>
 								$(document).ready(function(){
-
-									var options ={
+									var t = new TableView();
+									console.log(t);
+									/*var options ={
 										geturl:'http://callcenter.front-desk.ca/service/getagents?date=',
 										getparams:'2016-03-15T7:58:34',
 										list:'[data-id=list]:first'
@@ -228,7 +231,7 @@
 
 									setInterval(function(){
 										//	list.scrollUp();
-									},6000)
+									},6000)*/
 
 								})
 
