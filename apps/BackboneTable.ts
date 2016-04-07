@@ -1,7 +1,6 @@
-/**
- * Created by VladHome on 4/4/2016.
- */
-///<reference path="base.ts"/>
+///<reference path="../typings/jquery.d.ts"/>
+///<reference path="../typings/underscore.d.ts"/>
+///<reference path="../typings/backbone-global.d.ts"/>
 
 
 
@@ -13,13 +12,12 @@ class VOAgent{
     time:number;
     aux:string;
 }
-
 class AgentM extends Backbone.Model{
 
     defaults():VOAgent{
         return {
             stamp:0,
-            id:0,
+            id:3,
             fa:'',
             name:'',
             time:0,
@@ -100,7 +98,7 @@ class AppModel extends Backbone.Model{
 
 
 class TableView extends Backbone.View<AppModel>{
-   collection:AgentsC;
+    collectionAgentsC;
     constructor(){
         super();
        this.setElement($("#TableList"), true);
