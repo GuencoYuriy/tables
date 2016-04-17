@@ -10,7 +10,7 @@ module table {
     import TableRow = table2.ListRow;
     import CellValue = table.ItemValue;
 /////////////////////////////////////////////////////////////////////////////////////////////
-        setInterval(function(){ CellValue.disp.triggerHandler('time',-1)},1000);
+        //setInterval(function(){ CellValue.disp.triggerHandler('time',-1)},1000);
 
   interface  VOItem{
         key:number
@@ -124,7 +124,6 @@ module table {
        dataInd:any;
 
         setData(data:VOItem[]) {
-
             var newInd  = _.indexBy(data,'key');
             var oldInd = this.dataInd;
             if( oldInd){
@@ -149,7 +148,7 @@ module table {
             this.renderData();
             if(!this.$nanoContent) this.$nanoContent = this.$nano.find('.nano-content');
             this.height = this.$nanoContent.height();
-            console.log('this.height '+this.height);
+            //console.log('this.height '+this.height);
         }
 
 

@@ -14,6 +14,7 @@
 
 		<script src="libs/jquery-2.1.4.min.js"></script>
 		<script src="libs/underscore-min.js"></script>
+		<script  src="libs/backbone-min.js"></script>
 		<script src="libs/moment.min.js"></script>
 		<script src="libs/jquery.nanoscroller.min.js"></script>
 		<link href="css/mystyle.css" rel="stylesheet">
@@ -155,30 +156,27 @@
 
 					<div class="nano">
 						<div class="nano-content">
+							<script id="row-template" type="text/html" data-id="template">
+								<td class="td0">
+									<div class="icon" ><div class="<%=icon%>"  data-id="icon"></div></div>
+								</td>
+								<td class="td1">
+									<span data-id="name"><%=name%></span>
+								</td>
+								<td  class="td2">
+									<span data-id="time,time_color" class="<%=time_color%>"><%=time%></span>
+								</td>
+								<td class="td3">
+									<div class="animation">
+										<div data-id="aux,aux_color" ><%=aux%></div>
+									</div>
+								</td>
+
+							</script>
 							<table class="table table-responsive">
-								<tbody data-id="list">
+								<tbody id="TableList" data-id="list">
 
 								</tbody>
-
-								<script id="row-temlate" type="text/html" data-id="template">
-									<tr>
-										<td class="td0">
-											<div class="icon" ><div class="<%=icon%>"  data-id="icon"></div></div>
-										</td>
-										<td class="td1">
-											<span data-id="name"><%=name%></span>
-										</td>
-										<td  class="td2">
-											<span data-id="time,time_color" class="<%=time_color%>"><%=time%></span>
-										</td>
-										<td class="td3">
-											<div class="animation">
-												<div data-id="aux,aux_color" ><%=aux%></div>
-											</div>
-
-										</td>
-									</tr>
-								</script>
 
 
 							</table>
@@ -189,13 +187,18 @@
 					<script  src="apps/Formatter.js"></script>
 					<script  src="com/TableStatic.js"></script>
 					<script  src="com/TableInfin.js"></script>-->'
-					<script  src="libs/backbone-min.js"></script>
+
 					<script  src="apps/BackboneTable.js"></script>
 
 						<script>
 								$(document).ready(function(){
-									var t = new TableView();
-									console.log(t);
+									var collection = new AgentsC({url:'http://callcenter.front-desk.ca/service/get-agents-all?date=2016-03-15T7:58:34'});
+									///collection.bind('add',function(item){
+									//	console.log(item);
+									//})
+									var t = new TableView({collection:collection });
+
+									//console.log(t);
 									/*var options ={
 										geturl:'http://callcenter.front-desk.ca/service/getagents?date=',
 										getparams:'2016-03-15T7:58:34',

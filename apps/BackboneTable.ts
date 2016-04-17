@@ -3,7 +3,6 @@
 ///<reference path="../typings/backbone-global.d.ts"/>
 
 
-
 class VOAgent{
     stamp:number;
     id:number;
@@ -26,30 +25,6 @@ class AgentM extends Backbone.Model{
     }
 }
 
-class AgentsC extends Backbone.Collection<AgentM>{
-
-    model = AgentM;
-    data:any;
-
-    constructor(options:any){
-        super(options)
-        this.url = options.url
-        this.parse = (res)=>{
-            this.data = res;
-
-            var stamp = Date.now();
-            _.map(res.result.list,function(item:any){
-                item.stamp = stamp;
-                item.icon = 'fa fa-'+item.fa;
-
-            });
-            console.log(res.result.list.length);
-          //  console.log(res);
-            return res.result.list
-        }
-    }
-    //parse:(data)=>{ }
-}
 
 
 class Row extends Backbone.View<AgentM>{
@@ -57,15 +32,15 @@ class Row extends Backbone.View<AgentM>{
     model:AgentM;
     constructor(options:any){
         super(options);
+
         this.template = _.template($('#row-template').html());
-        this.model.bind('change', ()=>this.render());
-        this.model.bind('destroy',()=>this.destroy());
-        this.model.bind('remove',()=>this.remove());
-        this.model.bind('add',()=>this.add());
+       // this.model.bind('change', ()=>this.render());
+       // this.model.bind('destroy',()=>this.destroy());
+       // this.model.bind('remove',()=>this.remove());
+      //  this.model.bind('add',()=>this.add());
     }
 
     render() {
-
         console.log(this.model);
         this.$el.html(this.template(this.model.toJSON()));
 
@@ -96,29 +71,55 @@ class AppModel extends Backbone.Model{
     
 }
 
+class AgentsC extends Backbone.Collection<AgentM>{
+
+    model = AgentM;
+    data:any;
+
+    constructor(options:any){
+        super(options)
+        this.url = options.url
+
+    }
+    parse(res){
+    // this.data = res;
+
+      var stamp = Date.now();
+     _.map(res.result.list,function(item:any){
+     item.stamp = stamp;
+     item.icon = 'fa fa-'+item.fa;
+
+     });
+    // console.log(res.result.list.length);
+    //  console.log(res);
+    return res.result.list
+}
+    //parse:(data)=>{ }
+}
+
 
 class TableView extends Backbone.View<AppModel>{
     collectionAgentsC;
-    constructor(){
-        super();
+    constructor(options){
+        super(options);
        this.setElement($("#TableList"), true);
-      var collection = new AgentsC({url:'http://callcenter.front-desk.ca/service/getagents?date=2016-03-15T7:58:34'})
+     
        // collection.bind('reset', this.render);
-      this.collection = collection;
+      this.collection = options.collection;
         this.collection.bind('remove',(evt)=>{
             console.log('remove',evt);
         },this);
 
         this.collection.bind("add",(evt)=>{
-            console.log('add',evt);
-            var row = new Row({model:evt,tagName:'tr'});
+           console.log('add',evt);
+         var row = new Row({model:evt,tagName:'tr'});
            this.$el.append(row.render().el);
       },this);
         this.render = function(){
             console.log(this);
             return this;
         }
-      collection.fetch();
+        this.collection.fetch();
        setInterval(()=> {
             this.collection.fetch();
 

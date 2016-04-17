@@ -10,7 +10,7 @@ var table;
             this.el = el;
             ItemValue.disp.on(index, function (evt, val) {
                 if (val == -1)
-                    val += _this.value;
+                    val = _this.value + 1;
                 _this.setValue(val);
             });
             this.$view = $(el);
@@ -28,7 +28,7 @@ var table;
         ItemValue.disp = $({});
         ItemValue.format = {};
         return ItemValue;
-    })();
+    }());
     table.ItemValue = ItemValue;
     var formatTime = function (num) {
         if (isNaN(num))

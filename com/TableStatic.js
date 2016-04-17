@@ -150,7 +150,7 @@ var table4;
             this.removeItemsDone();
         };
         return Table;
-    })();
+    }());
     table4.Table = Table;
     ////////////////////////////////////////////////////////////////////////
     var CellValue = (function (_super) {
@@ -166,7 +166,7 @@ var table4;
             return true;
         };
         return CellValue;
-    })(table.ItemValue);
+    }(table.ItemValue));
     table4.CellValue = CellValue;
     /////////////////////////////////////////////////////////////////////////////////////////////
     setInterval(function () { CellValue.disp.triggerHandler('time', -1); }, 1000);

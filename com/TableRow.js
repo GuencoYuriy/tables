@@ -8,7 +8,7 @@ var table2;
         function VOItem() {
         }
         return VOItem;
-    })();
+    }());
     var ListRow = (function () {
         function ListRow(item, template) {
             this.item = item;
@@ -84,7 +84,7 @@ var table2;
         };
         ListRow.disp = $({});
         return ListRow;
-    })();
+    }());
     table2.ListRow = ListRow;
 })(table2 || (table2 = {}));
 //# sourceMappingURL=TableRow.js.map

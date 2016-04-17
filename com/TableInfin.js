@@ -5,9 +5,6 @@
 var table;
 (function (table) {
     var TableRow = table2.ListRow;
-    var CellValue = table.ItemValue;
-    /////////////////////////////////////////////////////////////////////////////////////////////
-    setInterval(function () { CellValue.disp.triggerHandler('time', -1); }, 1000);
     var TableInfin = (function () {
         function TableInfin(listid, options) {
             var _this = this;
@@ -105,7 +102,7 @@ var table;
             if (!this.$nanoContent)
                 this.$nanoContent = this.$nano.find('.nano-content');
             this.height = this.$nanoContent.height();
-            console.log('this.height ' + this.height);
+            //console.log('this.height '+this.height);
         };
         TableInfin.prototype.removeOld = function (newData) {
             var stamp = Date.now();
@@ -176,7 +173,7 @@ var table;
             this.removeItemsDone();
         };
         return TableInfin;
-    })();
+    }());
     table.TableInfin = TableInfin;
 })(table || (table = {}));
 //# sourceMappingURL=TableInfin.js.map
